@@ -23,6 +23,9 @@ Options:
 import sys
 import cmd
 from docopt import docopt, DocoptExit
+from App.view_posts import view_posts
+from App.add_post import add_post
+from App.comment_post import comment_post
 
 
 def docopt_cmd(func):
@@ -65,19 +68,19 @@ class MyInteractive (cmd.Cmd):
     def do_view_feed(self, arg):
         """Usage: view_feed"""
 
-        print(arg)
+        view_posts()
 
     @docopt_cmd
     def do_post(self, arg):
         """Usage: post <title> <body>"""
 
-        print(arg)
+        add_post(title=arg['title'], body=arg['body'])
 
     @docopt_cmd
     def do_commit(self, arg):
         """Usage: comment <postId> <title> <body>"""
 
-        print(arg)
+        comment_post(post_id=(arg['postId']), title=arg['title'], body=arg['body'] )
 
     def do_quit(self, arg):
         """Quits out of Interactive Mode."""
